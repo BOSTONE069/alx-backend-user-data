@@ -12,8 +12,7 @@ class DB:
     """ DB class for the ORM"""
 
     def __init__(self) -> None:
-        """Initialize a new DB instance
-        """
+        """Initialize a new DB instance"""
         self._engine = create_engine("sqlite:///a.db", echo=True)
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
@@ -21,8 +20,7 @@ class DB:
 
     @property
     def _session(self) -> Session:
-        """Memoized session object
-        """
+        """Memoized session object"""
         if self.__session is None:
             DBSession = sessionmaker(bind=self._engine)
             self.__session = DBSession()
