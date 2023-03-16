@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """Database for the SQLALCHEMY"""
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm.session import Session
 from user import Base, User
 
 
@@ -11,7 +9,7 @@ class DB:
     """ DB class for the ORM"""
 
     def __init__(self):
-        """Initialize a new DB instance"""
+        """Constructor Method"""
         self._engine = create_engine("sqlite:///a.db", echo=True)
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
@@ -19,7 +17,7 @@ class DB:
 
     @property
     def _session(self):
-        """Memoized session object"""
+        """Getter Session Method"""
         if self.__session is None:
             DBSession = sessionmaker(bind=self._engine)
             self.__session = DBSession()
